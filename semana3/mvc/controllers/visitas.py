@@ -8,18 +8,21 @@ class Visitas:
           cookie = web.cookies()
           visitas = 0
           today = date.today()
-          now = datetime.now()
+          now1 = datetime.now()
+          now = now1.hour
+          web.setcookie("Hora",str(now),expires="", domain= None)
+          web.setcookie("Fecha",str(today),expires="", domain= None)
           if name:
-            web.setcooke("name",name,expires="", domain= None)
+            web.setcookie("name",name,expires="", domain= None)
           else:
             name = "Anónimo"
-            web.setcooke("name",name,expires="", domain= None)
+            web.setcookie("name",name,expires="", domain= None)
           if cookie.get("visitas"):
             visitas = int(cookie.get("visitas"))
             visitas += 1
-            web.setcooke("visitas",str(visitas),expires="", domain= None)
+            web.setcookie("visitas",str(visitas),expires="", domain= None)
           else:
-            web.setcooke("visitas",str(visitas),expires="", domain= None)
+            web.setcookie("visitas",str(visitas),expires="", domain= None)
             visitas = "1"
           return "Visitas: " + str(visitas) + ", Nombre: " + name + ", Fecha: " + str(today) + ",Hora: " + str(now)
 
